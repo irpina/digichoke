@@ -82,11 +82,12 @@ each of T1-T4 from the Mod Menu (the corner showed T1 CHOKE A), then the
 factory pattern played for 3 s. 11 voices were choked, and the output's RMS
 over those 3 s was 1627 against 1768 with no group set (both OS alike).
 
-`lint` says it patches no site and links with core-dn1 5.0.1 and with 5.0 on 1.43, and with
-5.0.1 on 1.44, with the same code on both.
+`lint` says it patches no site and links, with the same code on both OS: with core-dn1 5.0.1 and 5.0
+on 1.43, with 5.0.1 on 1.44, and with the released core-dn1 4.1 (the core-dn1-v4.1 pre-release's
+files) on 1.43 and 1.44.
 
 Not checked: hearing the choke (which notes were cut, and whether the fade
-clicks), linking with a released 4.x core, the Digitone Keys, and anything
+clicks), running it on core 4.1 in the emulator, the Digitone Keys, and anything
 on hardware.
 
 ## Licence
