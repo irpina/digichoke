@@ -1,24 +1,76 @@
 {
- "id": "choke", "version": "0.1",
+ "id": "choke",
+ "version": "0.2",
  "license": "GPL-2.0-or-later",
- "title": "CHOKE GROUPS", "category": "Performance", "author": "irpina",
- "description": "Choke groups for the Digitone mk1 and Digitone Keys: a note on a track silences what the other tracks of its group are still playing, as an open hi-hat is cut by a closed one. CHOKE in the Mod Menu (hold a track key) puts the held track in group A or B, or none; saved with the project. A choked voice fades out over one block (0.7 ms). OS 1.43 and 1.44 (it names no firmware address: its 1.44 port is empty). Needs core-dn1 3.1 (its voice start and the voices' blocks), so it runs on 4.x and 5.x too.",
- "device": "digitone-mk1", "os": "1.43",
- "ports": {"1.44": {}},
- "sources": ["choke.c"],
- "cflags": ["-Os", "-fno-tree-loop-distribute-patterns"],
+ "title": "CHOKE GROUPS",
+ "category": "Performance",
+ "author": "irpina",
+ "description": "Choke groups for the Digitone mk1 and Digitone Keys: a note on a track silences what the other tracks of its group are still playing, as an open hi-hat is cut by a closed one. CHK on TRIG's second page (press TRIG twice) puts the track in group A-D or none, per pattern, and p-locks per trig (hold the trig and turn). A choked voice fades out over one block (0.7 ms). OS 1.43 and 1.44 (it names no firmware address: its 1.44 port is empty). Needs core-dn1 5.1 (its lane parameters, TRIG's second page and the notes the sequencer builds).",
+ "device": "digitone-mk1",
+ "os": "1.43",
+ "ports": {
+  "1.44": {}
+ },
+ "sources": [
+  "choke.c"
+ ],
+ "cflags": [
+  "-Os",
+  "-fno-tree-loop-distribute-patterns"
+ ],
  "subscribe": [
-  {"event": "ev_voice_on", "fn": "choke_voice_on", "order": 60},
-  {"event": "ev_render_voices", "fn": "choke_render", "order": 90},
-  {"event": "ev_tick", "fn": "choke_tick", "order": 50},
-  {"event": "ev_draw", "fn": "choke_draw", "order": 50}
+  {
+   "event": "ev_voice_on",
+   "fn": "choke_voice_on",
+   "order": 60
+  },
+  {
+   "event": "ev_voice_free",
+   "fn": "choke_voice_free",
+   "order": 50
+  },
+  {
+   "event": "ev_render_voices",
+   "fn": "choke_render",
+   "order": 90
+  }
  ],
  "contribute": [
-  {"to": "core_menu", "order": 55, "data": "00000000",
-   "relocs": [[0, "abs32", "sym:choke_menu", 0]]},
-  {"to": "core_projdata", "order": 50, "data": "00000000",
-   "relocs": [[0, "abs32", "sym:choke_projdata", 0]]}
+  {
+   "to": "core_params",
+   "order": 50,
+   "data": "00000000",
+   "relocs": [
+    [
+     0,
+     "abs32",
+     "sym:choke_param",
+     0
+    ]
+   ]
+  },
+  {
+   "to": "core_knobs",
+   "order": 50,
+   "data": "00000000",
+   "relocs": [
+    [
+     0,
+     "abs32",
+     "sym:choke_knob",
+     0
+    ]
+   ]
+  }
  ],
- "resources": {"core": "3.1", "names": ["projdata:CHOK"]},
- "requires": ["core"]
+ "resources": {
+  "core": "5.1",
+  "names": [
+   "param:184",
+   "knob:30:1"
+  ]
+ },
+ "requires": [
+  "core"
+ ]
 }
